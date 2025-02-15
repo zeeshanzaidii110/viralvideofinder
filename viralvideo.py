@@ -1,10 +1,10 @@
-
 import streamlit as st
 import requests
 from datetime import datetime, timedelta
 
-# YouTube API Key
-API_KEY = "AIzaSyCQnr_0TQggGEVSJ4-8j_D4zmc8Rjc3l68"
+# Securely access the API key from Streamlit Secrets
+API_KEY = st.secrets["api"]["key"]
+
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 YOUTUBE_VIDEO_URL = "https://www.googleapis.com/youtube/v3/videos"
 YOUTUBE_CHANNEL_URL = "https://www.googleapis.com/youtube/v3/channels"
@@ -12,18 +12,18 @@ YOUTUBE_CHANNEL_URL = "https://www.googleapis.com/youtube/v3/channels"
 # Streamlit App Title
 st.title("YouTube Viral Topics Tool")
 
-# Input Fields
+# Input Field for number of days
 days = st.number_input("Enter Days to Search (1-30):", min_value=1, max_value=30, value=5)
 
 # List of broader keywords
 keywords = [
- "Affair Relationship Stories", "Reddit Update", "Reddit Relationship Advice", "Reddit Relationship", 
-"Reddit Cheating", "AITA Update", "Open Marriage", "Open Relationship", "X BF Caught", 
-"Stories Cheat", "X GF Reddit", "AskReddit Surviving Infidelity", "GurlCan Reddit", 
-"Cheating Story Actually Happened", "Cheating Story Real", "True Cheating Story", 
-"Reddit Cheating Story", "R/Surviving Infidelity", "Surviving Infidelity", 
-"Reddit Marriage", "Wife Cheated I Can't Forgive", "Reddit AP", "Exposed Wife", 
-"Cheat Exposed"
+    "Affair Relationship Stories", "Reddit Update", "Reddit Relationship Advice", "Reddit Relationship", 
+    "Reddit Cheating", "AITA Update", "Open Marriage", "Open Relationship", "X BF Caught", 
+    "Stories Cheat", "X GF Reddit", "AskReddit Surviving Infidelity", "GurlCan Reddit", 
+    "Cheating Story Actually Happened", "Cheating Story Real", "True Cheating Story", 
+    "Reddit Cheating Story", "R/Surviving Infidelity", "Surviving Infidelity", 
+    "Reddit Marriage", "Wife Cheated I Can't Forgive", "Reddit AP", "Exposed Wife", 
+    "Cheat Exposed"
 ]
 
 # Fetch Data Button
@@ -120,5 +120,3 @@ if st.button("Fetch Data"):
 
     except Exception as e:
         st.error(f"An error occurred: {e}")
-
-
